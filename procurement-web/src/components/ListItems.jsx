@@ -38,6 +38,9 @@ const ListItems = ({ setIsOpen }) => {
                     Create Item
                 </button>
             </div>
+            {items.length === 0 && <div className='text-3xl text-center font-mono text-gray-400 font-bold'>
+                <h1>No items found</h1>
+            </div>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {items.map(item => (
                     <ItemCard key={item._id} item={item} onDelete={handleDelete} onEdit={handleEdit} />

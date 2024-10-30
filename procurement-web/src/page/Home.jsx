@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/SideBar';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import { useNavigate } from 'react-router-dom';
+import api from '../api/axiosInterceptor';
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, Title, Tooltip, Legend);
 
@@ -24,19 +25,37 @@ const centerTextPlugin = {
 };
 
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [Counts, setCounts] = useState({
+    suppliersCount: 0,
+    itemsCount: 0
+  });
   const data = {
     labels: ['Suppliers', 'Items'],
     datasets: [
       {
         label: 'Count',
-        data: [10, 20],
+        data: [Counts.suppliersCount, Counts.itemsCount],
         backgroundColor: ['#d4fae3', '#5ae1a9'],
         hoverBackgroundColor: ['#b8f1d8', '#48d095'],
         borderWidth: 1,
       },
     ],
   };
+
+  const fetchThings = async () => {
+    try {
+      const supplierData = await api.get('/supplier/');
+      const itemData = await api.get('/items/');
+      setCounts({ ...Counts, suppliersCount: supplierData.data.data.length, itemsCount: itemData.data.data.length })
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    fetchThings()
+  }, []);
 
   const options = {
     responsive: true,
@@ -62,11 +81,11 @@ const Home = () => {
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="border border-gray-300 rounded-lg p-4 bg-white shadow">
               <h2 className="text-lg font-semibold">Supplier Count</h2>
-              <p className="text-2xl font-bold">10</p>
+              <p className="text-2xl font-bold">{Counts.suppliersCount}</p>
             </div>
             <div className="border border-gray-300 rounded-lg p-4 bg-white shadow">
               <h2 className="text-lg font-semibold">Items Count</h2>
-              <p className="text-2xl font-bold">20</p>
+              <p className="text-2xl font-bold">{Counts.itemsCount}</p>
             </div>
           </div>
           <div className="flex flex-col items-center mb-6 bg-white rounded-lg shadow p-4 h-3/5">

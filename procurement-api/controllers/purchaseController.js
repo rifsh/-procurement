@@ -2,6 +2,8 @@ const Purchase = require('../models/Purchase')
 
 const createPurchase = async (req, res) => {
     try {
+        console.log(req.body);
+        
         const purchase = await Purchase.create(req.body)
         purchase.save()
         return res.status(201).json({
@@ -10,6 +12,8 @@ const createPurchase = async (req, res) => {
             data: purchase
         })
     } catch (error) {
+        console.log(error.message);
+        
         return res.status(500).json({
             status: 'faile',
             message: error.message

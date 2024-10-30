@@ -5,7 +5,7 @@ const useFetchData = () => {
   return useQuery({
     queryKey: ['suppliers'],
     queryFn: async () => {
-      const response = await api.get('/supplier');
+      const response = await api.get('/supplier');      
       return response.data.data;
     },
     staleTime: 1000 * 60 * 5,

@@ -12,6 +12,8 @@ const createItem = async (req, res) => {
             data: item
         })
     } catch (error) {
+        console.log(error.message);
+        
         return res.status(500).json({
             status: 'faile',
             message: error.message

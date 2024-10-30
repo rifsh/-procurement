@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const AuthoIncrement = require('mongoose-sequence')(mongoose)
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const itemSchema = mongoose.Schema({
     itemNo: { type: Number, unique: true },
@@ -12,7 +12,9 @@ const itemSchema = mongoose.Schema({
     unitPrice: { type: Number, required: true },
     itemImages: [{ type: String }],
     status: { type: String, enum: ["Enabled", "Disabled"], default: "Enabled" }
-})
+});
+
+itemSchema.plugin(AutoIncrement, { inc_field: 'itemNo', start_seq: 1 });
 
 const Item = mongoose.model("Item", itemSchema)
 module.exports = Item

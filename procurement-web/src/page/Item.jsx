@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Sidebar from '../components/SideBar';
 import useFetchData from '../hook/useSupplier';
 import { FaImage, FaTimes } from 'react-icons/fa';
 import handleFileUpload from '../utils/handleFileUpload';
 import api from '../api/axiosInterceptor';
 import ListItems from '../components/ListItems';
+import { BeatLoader } from 'react-spinners'
 
 const CreateItem = () => {
     const [formData, setFormData] = useState({
@@ -23,6 +23,7 @@ const CreateItem = () => {
     const [imagePreviews, setImagePreviews] = useState([]);
     const [isOpen, setIsOpen] = useState(true)
     const { data, isLoading, isError } = useFetchData();
+    const [loading, setLoading] = useState(false);
     console.log(data, 'data');
 
     const handleChange = (e) => {
@@ -53,7 +54,7 @@ const CreateItem = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         try {
             const uploadedImageUrls = await Promise.all(
                 formData.itemImages.map(file => handleFileUpload(file))
@@ -66,6 +67,7 @@ const CreateItem = () => {
 
             const response = await api.post('/items', formDataToSend);
             console.log('Item created successfully:', response.data);
+            setLoading(false);
         } catch (error) {
             console.error('Error creating item:', error);
         }
@@ -242,7 +244,8 @@ const CreateItem = () => {
 
                             {/* Submit Button */}
                             <button type="submit" className="w-full py-2 bg-primary text-black hover:text-white rounded-lg font-semibold hover:bg-secondary">
-                                Add Item
+                                {!loading &&<p>Add Item</p>}
+                                {loading && <BeatLoader />}
                             </button>
                         </form>
                     </div>
