@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import api from '../api/axiosInterceptor';
 import ItemCard from './ItemCard';
 
-const ListItems = ({setIsOpen}) => {
+const ListItems = ({ setIsOpen }) => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const ListItems = ({setIsOpen}) => {
         };
         fetchItems();
     }, []);
-console.log(items)
+    console.log(items)
     const handleDelete = async (id) => {
         try {
             await api.delete(`/items/${id}`);
@@ -30,21 +30,21 @@ console.log(items)
         // Implement your edit logic here, maybe redirect to an edit page or open a modal
         console.log('Edit item:', item);
     };
-  return (
-    <div className="p-6 bg-gray-100">
-        <div className="w-full flex justify-between items-center  p-4">
-    <h2 className="text-2xl font-bold text-secondary">Items List</h2>
-    <button className="bg-secondary p-3 rounded-xl text-white hover:bg-secondary-dark transition-colors" onClick={() => setIsOpen(false)}>
-        Create Item
-    </button>
-</div>
+    return (
+        <div className="p-6 bg-gray-100">
+            <div className="w-full flex justify-between items-center  p-4">
+                <h2 className="text-2xl font-bold text-secondary">Items List</h2>
+                <button className="bg-secondary p-3 rounded-xl text-white hover:bg-secondary-dark transition-colors" onClick={() => setIsOpen(false)}>
+                    Create Item
+                </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {items.map(item => (
                     <ItemCard key={item._id} item={item} onDelete={handleDelete} onEdit={handleEdit} />
                 ))}
             </div>
         </div>
-  )
+    )
 }
 
 export default ListItems

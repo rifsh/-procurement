@@ -7,24 +7,24 @@ const ItemCard = ({ item, onDelete, onEdit }) => {
         <div className="bg-white rounded-lg shadow-lg p-4">
             <div className="flex flex-col items-center">
                 <div className="flex flex-wrap gap-2 mb-4">
-                <img
-                    src={hoveredImage}
-                    alt={item.itemName}
-                    className="w-full h-48 object-cover rounded mb-4 transition-transform transform hover:scale-105"
-                />
-                
-                {/* Thumbnail images for hover effect */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {item.itemImages.map((img, index) => (
-                        <img
-                            key={index}
-                            src={img}
-                            alt={`${item.itemName} thumbnail ${index + 1}`}
-                            className="w-16 h-16 object-cover rounded cursor-pointer"
-                            onMouseEnter={() => setHoveredImage(img)} 
-                        />
-                    ))}
-                </div>
+                    <img
+                        src={hoveredImage}
+                        alt={item.itemName}
+                        className="w-full h-48 object-cover rounded mb-4 transition-transform transform hover:scale-105"
+                    />
+
+                    {/* Thumbnail images for hover effect */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {item.itemImages.map((img, index) => (
+                            <img
+                                key={index}
+                                src={img}
+                                alt={`${item.itemName} thumbnail ${index + 1}`}
+                                className="w-16 h-16 object-cover rounded cursor-pointer"
+                                onMouseEnter={() => setHoveredImage(img)}
+                            />
+                        ))}
+                    </div>
                 </div>
 
                 <h3 className="text-lg font-semibold text-secondary">{item.itemName}</h3>

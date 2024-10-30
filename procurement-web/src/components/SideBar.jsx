@@ -11,11 +11,11 @@ const MenuItem = ({ icon: Icon, label, items, onClick }) => {
 
   return (
     <div className="mb-2">
-      <div 
+      <div
         className="flex items-center justify-between p-2 group hover:bg-secondary rounded cursor-pointer"
         onClick={() => {
           setIsOpen(!isOpen);
-          if (onClick) onClick(label); 
+          if (onClick) onClick(label);
         }}
       >
         <div className="flex items-center text-black group-hover:text-white">
@@ -51,20 +51,20 @@ const Sidebar = () => {
         navigate('/history');
         break;
       case "CreateSupplier":
-        navigate('/supplier'); 
+        navigate('/supplier');
         break;
       case "addItem":
-        navigate('/item'); 
+        navigate('/item');
         break;
       case "Help":
-        
+
         break;
-        case "CreatePurchase":
-          navigate('/createpurchase')
-          break;
+      case "CreatePurchase":
+        navigate('/createpurchase')
+        break;
       case "Logout":
         localStorage.clear()
-        navigate('/login'); 
+        navigate('/login');
         break;
       default:
         break;
@@ -73,25 +73,25 @@ const Sidebar = () => {
 
   return (
     <>
-      {!isSidebarOpen&&<button 
-        onClick={() => setIsSidebarOpen(true)} 
+      {!isSidebarOpen && <button
+        onClick={() => setIsSidebarOpen(true)}
         className="sm:hidden absolute p-2 text-secondary rounded "
       >
         <FiMenu size={24} />
       </button>}
       <div className={`w-64 border mt-2 mb-5 text-white p-4 h-screen rounded-tr-xl rounded-br-xl ${isSidebarOpen ? 'block' : 'hidden relative '} sm:flex flex-col justify-between`}>
         <div>
-            {isSidebarOpen&&
-          <div className="mb-6 w-full justify-end flex sm:hidden" onClick={() => setIsSidebarOpen(false)} >
-          <IoMdCloseCircle color='red' />
-          </div>
+          {isSidebarOpen &&
+            <div className="mb-6 w-full justify-end flex sm:hidden" onClick={() => setIsSidebarOpen(false)} >
+              <IoMdCloseCircle color='red' />
+            </div>
           }
           <div className="space-y-2">
             <MenuItem icon={Home} label="Home" onClick={handleMenuItemClick} />
-            <MenuItem 
-              icon={History} 
-              label="History" 
-              onClick={handleMenuItemClick} 
+            <MenuItem
+              icon={History}
+              label="History"
+              onClick={handleMenuItemClick}
             />
             <MenuItem icon={UserPlus} label="CreateSupplier" onClick={handleMenuItemClick} />
             <MenuItem icon={PlusCircleIcon} label="addItem" onClick={handleMenuItemClick} />

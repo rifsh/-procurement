@@ -7,7 +7,7 @@ const loginadmin = async (req, res) => {
             const token = jwt.sign(
                 { id: Id },
                 process.env.JWT_SECRET,
-                { expiresIn: '1h' } 
+                { expiresIn: '1h' }
             )
             return res.status(200).json({
                 status: 'success',

@@ -1,11 +1,11 @@
-const express=require('express')
+const express = require('express')
 const { createPurchase, getPurchase, updatePurchase, deletePurchase } = require('../controllers/purchaseController')
 const authenticate = require('../middleware/authenticate')
-const router =express.Router()
+const router = express.Router()
 
-router.post('/',authenticate,createPurchase)
-.get('/',getPurchase)
-.put('/:id',authenticate,updatePurchase)
-.delete('/:id',authenticate,deletePurchase)
+router.post('/', authenticate, createPurchase)
+    .get('/', getPurchase)
+    .put('/:id', authenticate, updatePurchase)
+    .delete('/:id', authenticate, deletePurchase)
 
-module.exports=router
+module.exports = router

@@ -21,7 +21,7 @@ const CreateItem = () => {
     });
 
     const [imagePreviews, setImagePreviews] = useState([]);
-    const [isOpen,setIsOpen]=useState(true)
+    const [isOpen, setIsOpen] = useState(true)
     const { data, isLoading, isError } = useFetchData();
     console.log(data, 'data');
 
@@ -50,7 +50,7 @@ const CreateItem = () => {
     };
 
 
-   
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -76,176 +76,176 @@ const CreateItem = () => {
                 <Sidebar />
             </div>
             <div className='w-full overflow-y-auto'>
-                {isOpen?<ListItems setIsOpen={setIsOpen}/>:(
-                <div className="p-6 bg-white rounded-lg shadow-lg mt-8">
-                    <div className='flex justify-between items-center '>
-                    <h2 className="text-2xl font-bold mb-6 text-secondary">Add New Item</h2>
-                    <button className='bg-secondary p-3 rounded-xl text-white' onClick={()=>setIsOpen(true)}> Show Items</button>
-                    </div>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Item Name */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Item Name</label>
-                            <input
-                                type="text"
-                                name="itemName"
-                                value={formData.itemName}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            />
+                {isOpen ? <ListItems setIsOpen={setIsOpen} /> : (
+                    <div className="p-6 bg-white rounded-lg shadow-lg mt-8">
+                        <div className='flex justify-between items-center '>
+                            <h2 className="text-2xl font-bold mb-6 text-secondary">Add New Item</h2>
+                            <button className='bg-secondary p-3 rounded-xl text-white' onClick={() => setIsOpen(true)}> Show Items</button>
                         </div>
-
-                        {/* Inventory Location */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Inventory Location</label>
-                            <input
-                                type="text"
-                                name="inventoryLocation"
-                                value={formData.inventoryLocation}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            />
-                        </div>
-
-                        {/* Brand */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Brand</label>
-                            <input
-                                type="text"
-                                name="brand"
-                                value={formData.brand}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            />
-                        </div>
-
-                        {/* Category */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Category</label>
-                            <input
-                                type="text"
-                                name="category"
-                                value={formData.category}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            />
-                        </div>
-
-                        {/* Supplier */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Supplier</label>
-                            <select
-                                name="supplier"
-                                value={formData.supplier}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            >
-                                <option value="">Select a Supplier</option>
-                                {isLoading && <option>Loading...</option>}
-                                {isError && <option>Error loading suppliers</option>}
-                                {data && data.map(supplier => (
-                                    <option className='text-black' key={supplier._id} value={supplier._id}>
-                                        {supplier.supplierName}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        {/* Socke Unit */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Unit of Measure</label>
-                            <select
-                                name="sockeUnit"
-                                value={formData.sockeUnit}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            >
-                                <option value="Unit">Unit</option>
-                                <option value="Kg">Kg</option>
-                                <option value="Litre">Litre</option>
-                            </select>
-                        </div>
-
-                        {/* Unit Price */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Unit Price</label>
-                            <input
-                                type="number"
-                                name="unitPrice"
-                                value={formData.unitPrice}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                                required
-                            />
-                        </div>
-
-                        {/* Item Images */}
-                        <div>
-                        <label className="flex items-center font-semibold text-black mb-1">
-                                <FaImage className="mr-2 text-gray-600" />
-                                Item Images
-                            </label>
-                            <div className="relative">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            {/* Item Name */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Item Name</label>
                                 <input
-                                    type="file"
-                                    name="itemImages"
-                                    multiple
-                                    accept="image/*"
-                                    onChange={handleFileChange}
-                                    className="hidden" 
-                                    id="file-upload"
+                                    type="text"
+                                    name="itemName"
+                                    value={formData.itemName}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => document.getElementById('file-upload').click()}
-                                    className="px-4 py-2 bg-primary hover:text-white rounded-lg font-semibold hover:bg-secondary"
-                                >
-                                    Upload Images
-                                </button>
-                                </div>
-                            {/* Image Preview */}
-                            <div className="flex flex-wrap gap-2 mt-2">
-                                {imagePreviews.map((src, index) => (
-                                    <div key={index} className="relative">
-                                        <img src={src} alt="Preview" className="w-20 h-20 object-cover rounded" />
-                                        <button
-                                            type="button"
-                                            onClick={() => removeImage(index)}
-                                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center z-10"
-                                        >
-                                            <FaTimes /> 
-                                        </button>
-                                    </div>
-                                ))}
                             </div>
-                        </div>
 
-                        {/* Status */}
-                        <div>
-                            <label className="block font-semibold text-black mb-1">Status</label>
-                            <select
-                                name="status"
-                                value={formData.status}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border rounded-lg"
-                            >
-                                <option value="Enabled">Enabled</option>
-                                <option value="Disabled">Disabled</option>
-                            </select>
-                        </div>
+                            {/* Inventory Location */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Inventory Location</label>
+                                <input
+                                    type="text"
+                                    name="inventoryLocation"
+                                    value={formData.inventoryLocation}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
+                                />
+                            </div>
 
-                        {/* Submit Button */}
-                        <button type="submit" className="w-full py-2 bg-primary text-black hover:text-white rounded-lg font-semibold hover:bg-secondary">
-                            Add Item
-                        </button>
-                    </form>
-                </div>
+                            {/* Brand */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Brand</label>
+                                <input
+                                    type="text"
+                                    name="brand"
+                                    value={formData.brand}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
+                                />
+                            </div>
+
+                            {/* Category */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Category</label>
+                                <input
+                                    type="text"
+                                    name="category"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
+                                />
+                            </div>
+
+                            {/* Supplier */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Supplier</label>
+                                <select
+                                    name="supplier"
+                                    value={formData.supplier}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
+                                >
+                                    <option value="">Select a Supplier</option>
+                                    {isLoading && <option>Loading...</option>}
+                                    {isError && <option>Error loading suppliers</option>}
+                                    {data && data.map(supplier => (
+                                        <option className='text-black' key={supplier._id} value={supplier._id}>
+                                            {supplier.supplierName}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Socke Unit */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Unit of Measure</label>
+                                <select
+                                    name="sockeUnit"
+                                    value={formData.sockeUnit}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
+                                >
+                                    <option value="Unit">Unit</option>
+                                    <option value="Kg">Kg</option>
+                                    <option value="Litre">Litre</option>
+                                </select>
+                            </div>
+
+                            {/* Unit Price */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Unit Price</label>
+                                <input
+                                    type="number"
+                                    name="unitPrice"
+                                    value={formData.unitPrice}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                    required
+                                />
+                            </div>
+
+                            {/* Item Images */}
+                            <div>
+                                <label className="flex items-center font-semibold text-black mb-1">
+                                    <FaImage className="mr-2 text-gray-600" />
+                                    Item Images
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type="file"
+                                        name="itemImages"
+                                        multiple
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                        className="hidden"
+                                        id="file-upload"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => document.getElementById('file-upload').click()}
+                                        className="px-4 py-2 bg-primary hover:text-white rounded-lg font-semibold hover:bg-secondary"
+                                    >
+                                        Upload Images
+                                    </button>
+                                </div>
+                                {/* Image Preview */}
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    {imagePreviews.map((src, index) => (
+                                        <div key={index} className="relative">
+                                            <img src={src} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                                            <button
+                                                type="button"
+                                                onClick={() => removeImage(index)}
+                                                className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center z-10"
+                                            >
+                                                <FaTimes />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Status */}
+                            <div>
+                                <label className="block font-semibold text-black mb-1">Status</label>
+                                <select
+                                    name="status"
+                                    value={formData.status}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border rounded-lg"
+                                >
+                                    <option value="Enabled">Enabled</option>
+                                    <option value="Disabled">Disabled</option>
+                                </select>
+                            </div>
+
+                            {/* Submit Button */}
+                            <button type="submit" className="w-full py-2 bg-primary text-black hover:text-white rounded-lg font-semibold hover:bg-secondary">
+                                Add Item
+                            </button>
+                        </form>
+                    </div>
                 )}
             </div>
         </div>

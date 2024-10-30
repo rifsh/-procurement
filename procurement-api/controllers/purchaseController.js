@@ -1,94 +1,94 @@
-const Purchase=require('../models/Purchase')
+const Purchase = require('../models/Purchase')
 
-const createPurchase=async(req,res)=>{
+const createPurchase = async (req, res) => {
     try {
-        const purchase=await Purchase.create(req.body)
+        const purchase = await Purchase.create(req.body)
         purchase.save()
         return res.status(201).json({
-            status:'success',
-            message:'purchase create successFully',
-            data:purchase
+            status: 'success',
+            message: 'purchase create successFully',
+            data: purchase
         })
     } catch (error) {
         return res.status(500).json({
-            status:'faile',
-            message:error.message
+            status: 'faile',
+            message: error.message
         })
     }
 }
 
-const getPurchase=async(req,res)=>{
+const getPurchase = async (req, res) => {
     try {
-        const {id}=req.query
-        let purchase=[]
-        if(!purchase){
-            purchase =await Purchase.findById(id)
-        }else{
-            purchase=await Purchase.find().populate("supplierName")
+        const { id } = req.query
+        let purchase = []
+        if (!purchase) {
+            purchase = await Purchase.findById(id)
+        } else {
+            purchase = await Purchase.find().populate("supplierName")
         }
-        console.log(purchase,'purchase')
+        console.log(purchase, 'purchase')
         return res.status(200).json({
-            status:'success',
-            message:'purchase find successfully',
-            data:purchase
+            status: 'success',
+            message: 'purchase find successfully',
+            data: purchase
         })
     } catch (error) {
         return res.status(500).json({
-            status:'faile',
-            message:error.message
+            status: 'faile',
+            message: error.message
         })
     }
 }
 
 
-const updatePurchase=async(req,res)=>{
+const updatePurchase = async (req, res) => {
     try {
-        const {id}=req.params
-        const purchase=await Purchase.findByIdAndUpdate(id,req.body,{new:true})
-        if(!purchase){
+        const { id } = req.params
+        const purchase = await Purchase.findByIdAndUpdate(id, req.body, { new: true })
+        if (!purchase) {
             return res.status(404).json({
-                status:'faile',
-                message:'purchase not found'
+                status: 'faile',
+                message: 'purchase not found'
             })
         }
         return res.status(200).json({
-            status:'success',
-            message:'purchase fetching successfully',
-            data:purchase
+            status: 'success',
+            message: 'purchase fetching successfully',
+            data: purchase
         })
     } catch (error) {
         return res.status(500).json({
-            status:'faile',
-            message:error.message
+            status: 'faile',
+            message: error.message
         })
     }
 }
 
 
-const deletePurchase=async(req,res)=>{
+const deletePurchase = async (req, res) => {
     try {
-        const {id}=req.params
-        const purchase=await Purchase.findByIdAndDelete(id)
-        if(!purchase){
+        const { id } = req.params
+        const purchase = await Purchase.findByIdAndDelete(id)
+        if (!purchase) {
             return res.status(404).json({
-                status:'faile',
-                message:'purchase Not Fond'
+                status: 'faile',
+                message: 'purchase Not Fond'
             })
         }
         return res.status(200).json({
-            status:'success',
-            message:"purchase delete success fully",
-            data:purchase
+            status: 'success',
+            message: "purchase delete success fully",
+            data: purchase
         })
     } catch (error) {
         return res.status(500).json({
-            status:'faile',
-            message:error.message
+            status: 'faile',
+            message: error.message
         })
     }
 }
 
-module.exports={
+module.exports = {
     createPurchase,
     getPurchase,
     updatePurchase,

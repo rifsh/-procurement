@@ -53,7 +53,7 @@ const CreatePurchase = () => {
             const discountAmount = Number(item.discount) || 0;
             totalItemAmount += itemAmount;
             totalDiscount += discountAmount;
-            item.itemAmount = itemAmount - discountAmount; 
+            item.itemAmount = itemAmount - discountAmount;
         });
 
         setItemTotal(totalItemAmount);

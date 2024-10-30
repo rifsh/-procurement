@@ -50,77 +50,77 @@ const History = () => {
 
     return (
         <div className='h-screen flex overflow-hidden w-full'>
-        <Sidebar />
-        <main className='w-full overflow-y-auto p-6'>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <>
-                    <h2 className="text-2xl font-bold mb-4 text-secondary">Purchase History</h2>
-                    {purchases?.length > 0 ? (
-                        <>
-                            <div className="mb-4 flex w-full justify-end">
-                                <button 
-                                    onClick={handleExportToExcel} 
-                                    className="mr-2 px-4 py-2 bg-secondary text-white rounded" 
-                                    aria-label="Export to Excel"
-                                >
-                                    Export to Excel
-                                </button>
-                                <button 
-                                    onClick={handlePrint} 
-                                    className="px-4 py-2 bg-secondary text-white rounded" 
-                                    aria-label="Print"
-                                >
-                                    <FaPrint /> Print
-                                </button>
-                            </div>
-                            <table className="min-w-full bg-white border border-gray-200">
-                                <thead>
-                                    <tr className="bg-primary text-black">
-                                        <th className="py-2 px-4 border">Order No</th>
-                                        <th className="py-2 px-4 border">Order Date</th>
-                                        <th className="py-2 px-4 border">Supplier</th>
-                                        <th className="py-2 px-4 border">Total</th>
-                                        <th className="py-2 px-4 border">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {purchases.map(purchase => (
-                                        <tr key={purchase._id} className="hover:bg-gray-100">
-                                            <td className="py-2 px-4 border">{purchase.orderNo}</td>
-                                            <td className="py-2 px-4 border">{new Date(purchase.orderDate).toLocaleDateString()}</td>
-                                            <td className="py-2 px-4 border">{purchase.supplierName.supplierName}</td>
-                                            <td className="py-2 px-4 border">{purchase.itemTotal}</td>
-                                            <td className="py-2 px-4 border">
-                                                <button 
-                                                    className="text-blue-500" 
-                                                    onClick={() => console.log('Update', purchase._id)} 
-                                                    aria-label={`Edit purchase ${purchase.orderNo}`}
-                                                >
-                                                    <FaEdit />
-                                                </button>
-                                                <button 
-                                                    className="text-red-500 ml-2" 
-                                                    onClick={() => handleDelete(purchase._id)} 
-                                                    aria-label={`Delete purchase ${purchase.orderNo}`}
-                                                >
-                                                    <FaTrash />
-                                                </button>
-                                            </td>
+            <Sidebar />
+            <main className='w-full overflow-y-auto p-6'>
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <>
+                        <h2 className="text-2xl font-bold mb-4 text-secondary">Purchase History</h2>
+                        {purchases?.length > 0 ? (
+                            <>
+                                <div className="mb-4 flex w-full justify-end">
+                                    <button
+                                        onClick={handleExportToExcel}
+                                        className="mr-2 px-4 py-2 bg-secondary text-white rounded"
+                                        aria-label="Export to Excel"
+                                    >
+                                        Export to Excel
+                                    </button>
+                                    <button
+                                        onClick={handlePrint}
+                                        className="px-4 py-2 bg-secondary text-white rounded"
+                                        aria-label="Print"
+                                    >
+                                        <FaPrint /> Print
+                                    </button>
+                                </div>
+                                <table className="min-w-full bg-white border border-gray-200">
+                                    <thead>
+                                        <tr className="bg-primary text-black">
+                                            <th className="py-2 px-4 border">Order No</th>
+                                            <th className="py-2 px-4 border">Order Date</th>
+                                            <th className="py-2 px-4 border">Supplier</th>
+                                            <th className="py-2 px-4 border">Total</th>
+                                            <th className="py-2 px-4 border">Actions</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </>
-                    ) : (
-                        <p>No purchases found.</p>
-                    )}
-                </>
-            )}
-        </main>
-    </div>
-);
+                                    </thead>
+                                    <tbody>
+                                        {purchases.map(purchase => (
+                                            <tr key={purchase._id} className="hover:bg-gray-100">
+                                                <td className="py-2 px-4 border">{purchase.orderNo}</td>
+                                                <td className="py-2 px-4 border">{new Date(purchase.orderDate).toLocaleDateString()}</td>
+                                                <td className="py-2 px-4 border">{purchase.supplierName.supplierName}</td>
+                                                <td className="py-2 px-4 border">{purchase.itemTotal}</td>
+                                                <td className="py-2 px-4 border">
+                                                    <button
+                                                        className="text-blue-500"
+                                                        onClick={() => console.log('Update', purchase._id)}
+                                                        aria-label={`Edit purchase ${purchase.orderNo}`}
+                                                    >
+                                                        <FaEdit />
+                                                    </button>
+                                                    <button
+                                                        className="text-red-500 ml-2"
+                                                        onClick={() => handleDelete(purchase._id)}
+                                                        aria-label={`Delete purchase ${purchase.orderNo}`}
+                                                    >
+                                                        <FaTrash />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </>
+                        ) : (
+                            <p>No purchases found.</p>
+                        )}
+                    </>
+                )}
+            </main>
+        </div>
+    );
 };
 
 export default History;
